@@ -490,6 +490,44 @@
             opacity: 0 !important;
             pointer-events: none !important;
         }
+
+        /* Resume Grid Layout */
+        .resume-grid {
+            display: flex;
+            min-height: auto;
+            border-bottom: 1px solid #00ff41;
+        }
+
+        .resume-left {
+            width: 65%;
+            border-right: 1px solid #00ff41;
+            padding: 16px 24px;
+            overflow: hidden;
+        }
+
+        .resume-right {
+            width: 35%;
+            padding: 16px 24px;
+            background: rgba(10, 21, 32, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .resume-grid {
+                flex-direction: column;
+            }
+
+            .resume-left {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #00ff41;
+                padding: 16px;
+            }
+
+            .resume-right {
+                width: 100%;
+                padding: 16px;
+            }
+        }
     </style>
 </head>
 
@@ -608,12 +646,12 @@
 
             const allMobileLinks = [
                 ...navLinks,
-                { path: '/resume', label: '[RESUME]', isButton: true },
+                { path: '/resume', label: '[RESUME]', isExternal: false },
                 { path: 'https://www.linkedin.com/in/718752332/', label: '[CONNECT]', isExternal: true }
             ];
 
             return (
-                <nav className={`fixed top-0 left-0 w-full bg-retro-bg/95 border-b-2 border-retro-dim backdrop-blur-md transition-all duration-300 ${isMenuOpen ? 'z-[10000]' : 'z-[100]'}`}>
+                <nav className="fixed top-0 left-0 w-full bg-retro-bg/95 border-b-2 border-retro-dim backdrop-blur-md transition-all duration-300" style={{ zIndex: isMenuOpen ? 10000 : 100 }}>
                     <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between relative z-[110]">
                         <Link to="/" className="text-lg md:text-xl font-pixel text-retro-cyan hover:text-retro-green transition-colors text-glow-cyan">
                             DTA_SYSTEMS
@@ -661,7 +699,7 @@
                     >
                         {/* Drawer Header */}
                         <div className="flex items-center justify-between px-6 py-4 border-b-2 border-retro-cyan/20">
-                            <span className="font-pixel text-retro-cyan text-xl tracking-widest text-glow-cyan">MENU</span>
+                            <span className="font-pixel text-retro-cyan text-xl tracking-widest text-glow-cyan">GAME PAUSED</span>
                             <button
                                 onClick={() => setIsMenuOpen(false)}
                                 className="w-12 h-12 border-2 border-retro-cyan rounded flex items-center justify-center text-retro-cyan hover:bg-retro-cyan hover:text-[#0a1628] transition-colors"
@@ -1558,9 +1596,9 @@
                         </section>
 
                         {/* MAIN CONTENT GRID */}
-                        <div style={{ display: 'flex', minHeight: 'auto', borderBottom: '1px solid #00ff41' }}>
-                            {/* LEFT: Experience (65%) */}
-                            <section style={{ width: '65%', borderRight: '1px solid #00ff41', padding: '16px 24px', overflow: 'hidden' }}>
+                        <div className="resume-grid">
+                            {/* LEFT: Experience (65% desktop, 100% mobile) */}
+                            <section className="resume-left">
                                 <h2 className="font-retro text-xl glow-green underline-offset-8 decoration-2 mb-4 tracking-wider">&gt;&gt; WORK EXPERIENCE</h2>
                                 <div className="space-y-6">
                                     <div className="experience-card" style={{ borderLeftColor: '#00ff41' }}>
@@ -1601,8 +1639,8 @@
                                 </div>
                             </section>
 
-                            {/* RIGHT: Skills (35%) */}
-                            <section style={{ width: '35%', padding: '16px 24px', background: 'rgba(10, 21, 32, 0.4)' }}>
+                            {/* RIGHT: Skills (35% desktop, 100% mobile) */}
+                            <section className="resume-right">
                                 <h2 className="font-retro text-xl glow-cyan mb-6 tracking-wider">&gt;&gt; TECH_STACK</h2>
 
                                 <div className="space-y-6">
